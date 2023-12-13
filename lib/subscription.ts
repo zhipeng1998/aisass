@@ -20,8 +20,11 @@ export const checkSubscription = async () => {
       stripeCurrentPeriodEnd: true,
       stripeCustomerId: true,
       stripePriceId: true,
+      isPro: true,
     },
   })
+
+  console.log(userId,userSubscription,'userSubscription')
 
   if (!userSubscription) {
     return false;
@@ -31,5 +34,5 @@ export const checkSubscription = async () => {
     userSubscription.stripePriceId &&
     userSubscription.stripeCurrentPeriodEnd?.getTime()! + DAY_IN_MS > Date.now()
 
-  return !!isValid;
+  return  userSubscription.isPro==1|| !!isValid;
 };
